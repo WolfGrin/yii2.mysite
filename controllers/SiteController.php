@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\MyForm;  //импорт пространства имен созданного нами модуля
+use yii\helpers\Html;   //необходим для вызова метода Html::encode() - экранирует специальные символы
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -128,5 +130,25 @@ class SiteController extends Controller
     public function actionHello($message = "Hello world!")
     {
         return $this->render('hello', ['message' => $message]); // альтернатива ['message' => $message]     -    compact('message')
+    }
+
+    public function actionForm() {
+        $form = new MyForm();
+
+        if ($form->load(Yii::$app->request->post()) && $form->validate()) {
+            $name = Html::encode($form->name);
+            $email = Html::encode($form->email);
+        }
+        else {
+            $name = '';
+            $email = '';
+        }
+        return $this->render('form',
+            [
+                'form' => $form,
+                'name' => $name,
+                'email' => $email
+            ]
+        );
     }
 }

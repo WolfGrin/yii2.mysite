@@ -1,4 +1,4 @@
- <?php
+<?php
 /**
  * Created by PhpStorm.
  * User: User
@@ -8,10 +8,21 @@
 
 namespace app\models;
 
-
+use Yii;
 use yii\base\Model;
 
 class MyForm extends Model
 {
+    public $name;
+    public $email;
+
+    public function rules() {
+        return [
+            [['name', 'email'], 'required', 'message' => 'Незаполненное поле'],
+            ['email', 'email', 'message' => 'Не корректный e-mail адрес!']
+        ];
+    }
 
 }
+
+?>
