@@ -14,8 +14,9 @@ use yii\widgets\ActiveForm; //подключаем виджет отвечающ
 <p>Вы ввели имя <b><?=$name?></b> и email <b><?=$email?></b></p>
 <?php endif; ?>
 
-<?php $f = ActiveForm::begin(); ?>
+<?php $f = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); //в скобках атрибут для формы ?>
     <?= $f->field($form, 'name') ?>
     <?= $f->field($form, 'email') ?>
+    <?= $f->field($form, 'file')->fileInput() ?>
     <?= Html::submitButton('Отправить'); ?>
 <?php ActiveForm::end(); ?>

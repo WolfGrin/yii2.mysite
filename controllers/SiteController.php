@@ -3,6 +3,10 @@
 namespace app\controllers;
 
 use app\models\MyForm;  //импорт пространства имен созданного нами модуля
+
+//use GuzzleHttp\Psr7\UploadedFile;
+use yii\web\UploadedFile;
+
 use yii\helpers\Html;   //необходим для вызова метода Html::encode() - экранирует специальные символы
 use Yii;
 use yii\filters\AccessControl;
@@ -10,6 +14,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+
 
 class SiteController extends Controller
 {
@@ -138,6 +143,9 @@ class SiteController extends Controller
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
             $name = Html::encode($form->name);
             $email = Html::encode($form->email);
+
+            $form->file = UploadedFile::getInstance($form, 'file');
+            $form->file->saveAs('files/'.$form->file->baseName.'.'.$form->file->extension);
         }
         else {
             $name = '';
