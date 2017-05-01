@@ -27,4 +27,9 @@ phpunit.phar
 /phpunit.xml
 
 tests/_output/*
+
 tests/_support/_generated
+
+# all microsoft word temp files
+~*.docx
+~*.doc
