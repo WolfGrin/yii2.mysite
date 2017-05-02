@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\MyForm;  //импорт пространства имен созданного нами модуля
 
 //use GuzzleHttp\Psr7\UploadedFile;
+use yii\data\Pagination;
 use yii\web\UploadedFile;
 
 use yii\helpers\Html;   //необходим для вызова метода Html::encode() - экранирует специальные символы
@@ -163,7 +164,18 @@ class SiteController extends Controller
 
     public function actionComments ()
     {
-        $comments = Comments::find()->all();
-        return $this->render('comments', ['comments' => $comments]);
+        $comments = Comments::find();
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 2,
+            'totalCount' => $comments->count()
+        ]);
+
+        $comments = $comments->offset($pagination->offset)->limit($pagination->limit)->all();
+
+        return $this->render('comments', [
+            'comments' => $comments,
+            'pagination' => $pagination
+        ]);
     }
 }
