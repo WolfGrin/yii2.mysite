@@ -14,6 +14,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Comments;
 
 
 class SiteController extends Controller
@@ -137,7 +138,7 @@ class SiteController extends Controller
         return $this->render('hello', ['message' => $message]); // альтернатива ['message' => $message]     -    compact('message')
     }
 
-    public function actionForm() {
+    public function actionForm(){
         $form = new MyForm();
 
         if ($form->load(Yii::$app->request->post()) && $form->validate()) {
@@ -159,4 +160,12 @@ class SiteController extends Controller
             ]
         );
     }
+
+    public function actionComments ()
+    {
+        $comments = Comments::find()->all();
+        return $this->render('comments', ['comments' => $comments]);
+    }
 }
+
+        yii\db\ActiveRecord::find()->all()->offset()->limit()->orderBy();
