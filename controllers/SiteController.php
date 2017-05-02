@@ -167,5 +167,3 @@ class SiteController extends Controller
         return $this->render('comments', ['comments' => $comments]);
     }
 }
-
-        yii\db\ActiveRecord::find()->all()->offset()->limit()->orderBy();
