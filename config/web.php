@@ -11,6 +11,14 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'asdasd132asd123qwe',
         ],
+        'urlManager' => [
+//            'enablePrettyUrl' => true,  // если true, включает ЧПУ, но есть необходимость донастроить .htaccess
+//            'showScriptName' => false,  // убирает index.php
+//            'rules' => [                // правила для формирования адресов: 'about' - что получим, 'site/about' - что было
+//                'about' => 'site/about',
+//            ],
+        ],
+
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
