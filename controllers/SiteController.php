@@ -178,4 +178,12 @@ class SiteController extends Controller
             'pagination' => $pagination
         ]);
     }
+
+    public function actionUser ()
+    {
+        $name = Yii::$app->request->get('name', 'Гость');
+        return $this->render('user', [
+            'name' => $name
+        ]);
+    }
 }
